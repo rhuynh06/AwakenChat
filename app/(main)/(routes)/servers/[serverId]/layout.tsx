@@ -7,6 +7,7 @@ const ServerIdLayout = async ({ children, params }: {
     children: React.ReactNode;
     params: { serverId: string}
 }) => {
+    const awaitedParams = await params;
     const profile = await currentProfile();
 
     if (!profile) {
@@ -15,7 +16,7 @@ const ServerIdLayout = async ({ children, params }: {
 
     const server = await db.server.findUnique({
         where: {
-            id: params.serverId,
+            id: awaitedParams.serverId,
             members: {
                 some: {
                     profileId: profile.id
@@ -32,7 +33,7 @@ const ServerIdLayout = async ({ children, params }: {
     return (
         <div className="h-full">
             <div className="hidden md:flex h-full w-60 z-20 flex-col fixed inset-y-0">
-                <ServerSidebar serverId={params.serverId}/>
+                <ServerSidebar serverId={awaitedParams.serverId}/>
             </div>
             <main className="h-full md:pl-60">
                 {children}

@@ -7,8 +7,11 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
+  // url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL")
+
   url = env("DIRECT_URL") // localhost
-  // url       = env("DATABASE_URL") // deployment
+  // url = env("DATABASE_URL") // deployment
 }
         
 model Profile {
