@@ -7,7 +7,8 @@ const nextConfig: NextConfig = {
       "uploadthing.com",
       "y7uhvuc8mc.ufs.sh"
     ]
-  }
+  },
+  devIndicators: false
 }
 
 export default nextConfig;
