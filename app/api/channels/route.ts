@@ -50,7 +50,7 @@ export async function POST(
         
         return NextResponse.json(server);
     } catch (error) {
-        console.log("[MEMBERS_ID_PATCH", error);
+        console.log("[CHANNELS_PATCH]", error);
         return new NextResponse("Internal Error", { status: 500 });
     }
 }
