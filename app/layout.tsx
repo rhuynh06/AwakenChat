@@ -13,6 +13,7 @@ import { ThemeProvider } from '@/components/providers/theme-provider'
 import { ModalProvider } from '@/components/providers/modal-provider'
 import { cn } from '@/lib/utils'
 import { SocketProvider } from '@/components/providers/socket-provider'
+import { QueryProvider } from '@/components/providers/query-provider'
 
 const font = Open_Sans({ subsets: ['latin'] })
 
@@ -37,6 +38,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           >
             <SocketProvider>
               <ModalProvider />
+              <QueryProvider>
+                {children}
+              </QueryProvider>
               {/* <header className="flex justify-end items-center p-4 gap-4 h-16">
                 <SignedOut>
                   <SignInButton />
@@ -50,7 +54,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                   <UserButton />
                 </SignedIn>
               </header> */}
-              {children}
             </SocketProvider>
           </ThemeProvider>
         </body>
