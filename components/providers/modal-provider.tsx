@@ -11,6 +11,7 @@ import { DeleteServerModal } from "@/components/modals/delete-server-modal";
 import { DeleteChannelModal } from "@/components/modals/delete-channel-model";
 import { EditChannelModal } from "@/components/modals/edit-channel-modal";
 import { MessageFileModal } from "@/components/modals/message-file-modal";
+import { DeleteMessagelModal } from "@/components/modals/delete-message-modal";
 
 export const ModalProvider = () => {
     // prevent hydration errors
@@ -36,6 +37,7 @@ export const ModalProvider = () => {
             <DeleteChannelModal />
             <EditChannelModal />
             <MessageFileModal />
+            <DeleteMessagelModal />
         </>
     )
 }
