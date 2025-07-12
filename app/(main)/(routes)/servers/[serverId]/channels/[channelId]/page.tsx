@@ -1,4 +1,6 @@
 import { ChatHeader } from "@/components/chat/chat-header";
+import { ChatInput } from "@/components/chat/chat-input";
+import { ChatMessages } from "@/components/chat/chat-messages";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
@@ -12,7 +14,6 @@ interface ChannelIdPageProps {
 
 const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
     const profile = await currentProfile();
-    const awaitedParams = await params;
 
     if (!profile) {
         return redirect("/sign-in");
@@ -20,13 +21,13 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
 
     const channel = await db.channel.findUnique({
         where: {
-            id: awaitedParams.channelId
+            id: params.channelId
         }
     });
 
     const member = await db.member.findFirst({
         where: {
-            serverId: awaitedParams.serverId,
+            serverId: params.serverId,
             profileId: profile.id,
         }
     });
@@ -41,6 +42,29 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
                 name={channel.name}
                 serverId={channel.serverId}
                 type="channel"
+            />
+            <ChatMessages 
+                member={member}
+                name={channel.name}
+                chatId={channel.id}
+                type="channel"
+                apiUrl="/api/messsages"
+                socketUrl="/api/socket/messages"
+                socketQuery={{
+                    channelId: channel.id,
+                    serverId: channel.serverId
+                }}
+                paramKey="channelId"
+                paramValue={channel.id}
+            />
+            <ChatInput
+                name={channel.name}
+                type="channel"
+                apiUrl="/api/socket/messages"
+                query={{
+                    channelId: channel.id,
+                    serverId: channel.serverId
+                }}
             />
         </div>
     );
