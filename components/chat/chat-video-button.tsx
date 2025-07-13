@@ -4,7 +4,6 @@ import qs from "query-string";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Video, VideoOff} from "lucide-react";
 import { ActionToolTip } from "@/components/action-tooltip";
-import path from "path";
 
 export const ChatVideoButton = () => {
     const pathname = usePathname();
