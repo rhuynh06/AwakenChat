@@ -109,6 +109,7 @@ export const ChatItem = ({
         }
     }
 
+    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         form.reset({
             content: content
