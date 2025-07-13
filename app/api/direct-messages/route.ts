@@ -68,10 +68,7 @@ export async function GET(
         let nextCursor: string | null = null;
 
         if (messages.length === MESSAGES_BATCH) {
-        const lastMessage = messages[MESSAGES_BATCH - 1];
-        if (lastMessage?.id) {
-            nextCursor = lastMessage.id;
-        }
+            nextCursor = messages[MESSAGES_BATCH - 1].id;
         }
 
         return NextResponse.json({
