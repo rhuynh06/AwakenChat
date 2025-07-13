@@ -1,6 +1,5 @@
 "use client";
 
-
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
 import { useTheme } from "next-themes";
