@@ -231,7 +231,7 @@ export const ChatItem = ({
                         </ActionToolTip>
                     )}
                     {canDeleteMessage && (
-                        <ActionToolTip label="Edit">
+                        <ActionToolTip label="Trash">
                             <Trash 
                                 onClick={() => onOpen("deleteMessage", {
                                     apiUrl: `${socketUrl}/${id}`,

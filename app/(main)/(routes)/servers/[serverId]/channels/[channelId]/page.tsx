@@ -6,13 +6,14 @@ import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 
 interface ChannelIdPageProps {
-    params: {
+    params: Promise<{
         serverId: string;
         channelId: string;
-    }
+    }>
 }
 
-const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
+const ChannelIdPage = async (props: ChannelIdPageProps) => {
+    const params = await props.params;
     const profile = await currentProfile();
 
     if (!profile) {
@@ -35,7 +36,7 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
     if (!channel || !member) {
         return redirect("/");
     }
-    
+
     return (
         <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
             <ChatHeader
