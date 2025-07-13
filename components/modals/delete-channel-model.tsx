@@ -33,11 +33,11 @@ export const DeleteChannelModal = () => {
                     serverId: server?.id
                 }
             })
-            await axios.delete(url)
+            await axios.delete(url);
             onClose();
             router.refresh();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         } finally {
             setIsLoading(false);
         }
@@ -45,22 +45,22 @@ export const DeleteChannelModal = () => {
 
     return (
         <Dialog open={isModalOpen} onOpenChange={onClose}>
-            <DialogContent className="bg-white text-black p-0 overflow-hidden">
+            <DialogContent className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-0 overflow-hidden rounded-lg shadow-lg">
                 <DialogHeader className="pt-8 px-6">
-                    <DialogTitle className="text-2xl text-center font-bold">
+                    <DialogTitle className="text-2xl font-bold text-center tracking-tight">
                         Delete Channel
                     </DialogTitle>
-                    <DialogDescription className="text-center text-zinc-500">
-                        Are you sure you want to do this? <br/>
-                        <span className="font-semibold text-indigo-500">#{channel?.name}</span> will be permanently deleted.
+                    <DialogDescription className="text-center text-gray-500 dark:text-gray-400 mt-1">
+                        Are you sure you want to do this? <br />
+                        <span className="font-semibold text-indigo-600 dark:text-indigo-400">#{channel?.name}</span> will be permanently deleted.
                     </DialogDescription>
                 </DialogHeader>
-                <DialogFooter className="bg-gray-100 px-6 py-4">
+                <DialogFooter className="bg-gray-100 dark:bg-gray-700 px-6 py-4">
                     <div className="flex items-center justify-between w-full">
                         <Button
                             disabled={isLoading}
                             onClick={onClose}
-                            variant="ghost"
+                            className="bg-indigo-500 text-white hover:bg-indigo-600 focus:ring-indigo-400"
                         >
                             Cancel
                         </Button>
@@ -68,6 +68,7 @@ export const DeleteChannelModal = () => {
                             disabled={isLoading}
                             onClick={onConfirm}
                             variant="primary"
+                            className="bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-600 text-white"
                         >
                             Confirm
                         </Button>

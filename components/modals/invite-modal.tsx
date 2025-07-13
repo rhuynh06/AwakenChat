@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/use-modal-store";
 import { useOrigin } from "@/hooks/use-origin";
-import { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export const InviteModal = () => {
     const { onOpen, isOpen, onClose, type, data } = useModal();
@@ -27,25 +27,35 @@ export const InviteModal = () => {
 
     const inviteUrl = `${origin}/invite/${server?.inviteCode}`;
 
-    const onCopy = () => {
-        navigator.clipboard.writeText(inviteUrl);
-        setCopied(true);
-
-        setTimeout(() => {
-            setCopied(false);
-        }, 1000);
+    const onCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(inviteUrl);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1000);
+        } catch (error) {
+            console.error("Failed to copy invite link:", error);
+        }
     }
 
     const onNew = async () => {
+        setIsLoading(true);
         try {
             const response = await axios.patch(`/api/servers/${server?.id}/invite-code`);
-            onOpen("invite", { server: response.data })
+            onOpen("invite", { server: response.data });
         } catch (error) {
-            console.log(error);
+            console.error("Failed to generate new invite code:", error);
         } finally {
             setIsLoading(false);
         }
     }
+
+    const inputRef = useRef<HTMLInputElement | null>(null);
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.blur();
+        }
+    }, []);
 
     return (
         <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -61,12 +71,19 @@ export const InviteModal = () => {
                     </Label>
                     <div className="flex items-center mt-2 gap-x-2">
                         <Input
+                            ref={inputRef}
                             disabled={isLoading}
-                            className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                            className="selection:bg-indigo-200 selection:text-indigo-900 bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                             value={inviteUrl}
+                            readOnly
                         />
-                        <Button disabled={isLoading} onClick={onCopy} size="icon">
-                            {copied ? <Check className="w-4 h-4"/> : <Copy className="w-4 h-4"/>}
+                        <Button
+                            disabled={isLoading}
+                            onClick={onCopy}
+                            size="icon"
+                            className="bg-transparent text-zinc-600 hover:bg-zinc-300 focus:ring-0"
+                        >
+                            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                         </Button>
                     </div>
                     <Button
@@ -74,11 +91,12 @@ export const InviteModal = () => {
                         disabled={isLoading}
                         variant="link"
                         size="sm"
-                        className="text-sm text-zinc-500 mt-4"
+                        className="text-sm text-zinc-500 mt-4 bg-transparent hover:bg-transparent focus:ring-0"
                     >
                         Generate a new link
                         <RefreshCw className="w-4 h-4 ml-2" />
                     </Button>
+
                 </div>
             </DialogContent>
         </Dialog>

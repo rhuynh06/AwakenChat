@@ -39,7 +39,7 @@ const formSchema = z.object({
 export const InitialModal = () => {
     const [isMounted, setIsMounted] = useState(false);
     const router = useRouter();
-    
+
     useEffect(() => {
         setIsMounted(true);
     }, []);
@@ -57,17 +57,15 @@ export const InitialModal = () => {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             await axios.post("/api/servers", values);
-            form.reset()
+            form.reset();
             router.refresh();
-            window.location.reload();
+            window.location.reload();  // Could try without reload, depending on your app
         } catch (error) {
-            console.log("There was an error with creating the server: ", error);
+            console.error("Error creating the server:", error);
         }
-    }
+    };
 
-    if (!isMounted) {
-        return null;
-    }
+    if (!isMounted) return null;
 
     return (
         <Dialog open>
@@ -77,7 +75,7 @@ export const InitialModal = () => {
                         Customize your server
                     </DialogTitle>
                     <DialogDescription className="text-center text-zinc-500">
-                        Give your sever a personality with a name and an image. You can always change it later.
+                        Give your server a personality with a name and an image. You can always change it later.
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
@@ -123,7 +121,7 @@ export const InitialModal = () => {
                             />
                         </div>
                         <DialogFooter className="bg-gray-100 px-6 py-4">
-                            <Button disabled={isLoading} variant="primary">
+                            <Button disabled={isLoading} variant="primary" className="w-full">
                                 Create
                             </Button>
                         </DialogFooter>
@@ -131,5 +129,5 @@ export const InitialModal = () => {
                 </Form>
             </DialogContent>
         </Dialog>
-    )
-}
+    );
+};

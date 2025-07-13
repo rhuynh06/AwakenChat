@@ -77,85 +77,85 @@ export const EditChannelModal = () => {
                 }
             });
             await axios.patch(url, values);
-            form.reset()
+            form.reset();
             router.refresh();
             onClose();
         } catch (error) {
-            console.log("There was an error with creating the server: ", error);
+            console.log("There was an error with updating the channel: ", error);
         }
-    }
+    };
 
     const handleClose = () => {
         form.reset();
         onClose();
-    }
+    };
 
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
-            <DialogContent className="bg-white text-black p-0 overflow-hidden">
+            <DialogContent className="bg-white text-gray-900 p-0 overflow-hidden rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-100">
                 <DialogHeader className="pt-8 px-6">
-                    <DialogTitle className="text-2xl text-center font-bold">
+                    <DialogTitle className="text-3xl font-extrabold text-center tracking-wide">
                         Edit Channel
                     </DialogTitle>
                 </DialogHeader>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <div className="space-y-8 px-6">
-                            <FormField
-                                control={form.control}
-                                name="name"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                                            Channel name
-                                        </FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                disabled={isLoading}
-                                                className="!bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                                                placeholder="Enter channel name"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="type"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Channel Type</FormLabel>
-                                        <Select
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10 px-6 pb-8">
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="uppercase text-xs font-semibold text-gray-500 dark:text-gray-400">
+                                        Channel name
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input
                                             disabled={isLoading}
-                                            onValueChange={field.onChange}
-                                            defaultValue={field.value}
-                                        >
-                                            <FormControl>
-                                                <SelectTrigger className="!bg-zinc-300/50 border-0 focus:ring-0 text-black ring-offset-0 focus:ring-offset-0 capitalize outline-none w-full">
-                                                    <SelectValue placeholder="Select a channel type"/>
-                                                </SelectTrigger>
-                                            </FormControl>
-                                            <SelectContent>
-                                                {Object.values(ChannelType).map((type) => (
-                                                    <SelectItem
-                                                        key={type}
-                                                        value={type}
-                                                        className="capitalize"
-                                                    >
-                                                        {type.toLowerCase()}
-                                                    </SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                        <DialogFooter className="bg-gray-100 px-6 py-4">
-                            <Button disabled={isLoading} variant="primary">
+                                            className="bg-gray-100 border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500 text-zinc-600 dark:text-zinc-200 placeholder-gray-600 disabled:opacity-50"
+                                            placeholder="Enter channel name"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage className="text-red-600 dark:text-red-400" />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="type"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="uppercase text-xs font-semibold text-gray-500 dark:text-gray-400">
+                                        Channel Type
+                                    </FormLabel>
+                                    <Select
+                                        disabled={isLoading}
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger className="bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-zinc-600 dark:text-zinc-200 w-full capitalize disabled:opacity-50">
+                                                <SelectValue placeholder="Select a channel type" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent className="bg-white dark:bg-gray-700 rounded-md shadow-lg">
+                                            {Object.values(ChannelType).map((type) => (
+                                                <SelectItem
+                                                    key={type}
+                                                    value={type}
+                                                    className="capitalize text-gray-900 dark:text-gray-100"
+                                                >
+                                                    {type.toLowerCase()}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage className="text-red-600 dark:text-red-400" />
+                                </FormItem>
+                            )}
+                        />
+                        <DialogFooter>
+                            <Button disabled={isLoading} variant="primary" className="w-full">
                                 Save
                             </Button>
                         </DialogFooter>
@@ -163,5 +163,5 @@ export const EditChannelModal = () => {
                 </Form>
             </DialogContent>
         </Dialog>
-    )
-}
+    );
+};

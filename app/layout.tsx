@@ -11,7 +11,7 @@ import { QueryProvider } from '@/components/providers/query-provider'
 const font = Open_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'MyChatApp',
+  title: 'AwakenChat',
   description: 'A modern chat platform with real-time messaging, video calls, and server-based organization. Built with Next.js.'
 }
 
