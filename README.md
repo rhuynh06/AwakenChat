@@ -48,7 +48,7 @@ UPLOADTHING_APP_ID=your_uploadthing_app_id
 LIVEKIT_API_KEY=your_livekit_api_key
 LIVEKIT_API_SECRET=your_livekit_api_secret
 LIVEKIT_URL=wss://your-livekit-url
-
+```
 ---
 
 ## Tutorial Credit
