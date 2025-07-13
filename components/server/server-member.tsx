@@ -13,8 +13,14 @@ interface ServerMemberProps {
 
 const roleIconMaps = {
   [MemberRole.GUEST]: null,
-  [MemberRole.MODERATOR]: <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
-  [MemberRole.ADMIN]: <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />,
+  [MemberRole.MODERATOR]: <ShieldCheck className="h-6 w-6 ml-2 text-indigo-600 dark:text-indigo-400" />,
+  [MemberRole.ADMIN]: <ShieldAlert className="h-6 w-6 ml-2 text-rose-600 dark:text-rose-400" />,
+};
+
+const roleColorClassMap = {
+  [MemberRole.GUEST]: "text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300",
+  [MemberRole.MODERATOR]: "text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-700 dark:group-hover:text-indigo-300",
+  [MemberRole.ADMIN]: "text-rose-600 dark:text-rose-400 group-hover:text-rose-700 dark:group-hover:text-rose-300",
 };
 
 export const ServerMember = ({ member }: ServerMemberProps) => {
@@ -42,7 +48,8 @@ export const ServerMember = ({ member }: ServerMemberProps) => {
       />
       <p
         className={cn(
-          "font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition",
+          "font-semibold text-sm transition",
+          roleColorClassMap[member.role],
           params?.memberId === member.id &&
             "text-primary dark:text-zinc-200 dark:group-hover:text-white"
         )}
