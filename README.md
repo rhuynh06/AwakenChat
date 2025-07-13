@@ -1,6 +1,6 @@
-# MyChatApp
+# AwakenChat
 
-MyChatApp is a full-stack, real-time chat application inspired by Discord, built with Next.js. It supports messaging, file sharing, audio/video calls, server and channel management, and user roles. The project was created to deepen my understanding of real-time communication, WebRTC, authentication flows, and fullstack app architecture.
+AwakenChat is a full-stack, real-time chat application inspired by Discord, built with Next.js. It supports messaging, file sharing, audio/video calls, server and channel management, and user roles. The project was created to deepen my understanding of real-time communication, WebRTC, authentication flows, and fullstack app architecture.
 
 ---
 
@@ -20,8 +20,8 @@ MyChatApp is a full-stack, real-time chat application inspired by Discord, built
 
 ```bash
 # Clone the repository
-git clone https://github.com/rhuynh06/MyChatApp.git
-cd MyChatApp
+git clone https://github.com/rhuynh06/AwakenChat.git
+cd AwakenChat
 
 # Install dependencies
 npm install
