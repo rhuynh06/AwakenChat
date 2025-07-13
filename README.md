@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MyChatApp
 
-## Getting Started
+MyChatApp is a full-stack, real-time chat application inspired by Discord, built with Next.js. It supports messaging, file sharing, audio/video calls, server and channel management, and user roles. The project was created to deepen my understanding of real-time communication, WebRTC, authentication flows, and fullstack app architecture.
 
-First, run the development server:
+---
+
+## Tech Stack
+
+- **Frontend:** Next.js + TypeScript + Tailwind CSS + shadcn/ui  
+- **Backend:** Next.js API Routes + Socket.io  
+- **Database:** Supabase (PostgreSQL) + Prisma ORM  
+- **Authentication:** Clerk  
+- **Audio/Video:** LiveKit  
+- **File Uploads:** UploadThing  
+- **Deployment:** Render
+
+---
+
+## Run Locally
 
 ```bash
+# Clone the repository
+git clone https://github.com/rhuynh06/MyChatApp.git
+cd MyChatApp
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.local.example .env.local
+# Fill in Clerk, Supabase, LiveKit, UploadThing, and database values
+
+# Push database schema (if using Prisma locally)
+npx prisma db push
+
+# Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# App runs at http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# In your .env:
+DATABASE_URL=your_planetscale_db_url
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+UPLOADTHING_SECRET=your_uploadthing_secret
+UPLOADTHING_APP_ID=your_uploadthing_app_id
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+LIVEKIT_API_KEY=your_livekit_api_key
+LIVEKIT_API_SECRET=your_livekit_api_secret
+LIVEKIT_URL=wss://your-livekit-url
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Tutorial Credit
+This project began as a guided build using an [11-hour fullstack Discord Clone tutorial](https://www.youtube.com/watch?v=ZLr3dnLG3wQ), which I used to understand fullstack architecture, real-time communication, and WebRTC. I expanded on it by refining the UI, improving functionality, and deploying the app to production with my own configuration and customizations.
