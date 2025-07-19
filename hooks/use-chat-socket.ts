@@ -25,11 +25,13 @@ export const useChatSocket = ({ addKey, updateKey, queryKey}: ChatSocketProps) =
         }
 
         socket.on(updateKey, (message: MessageWithMemberWithProfile) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             queryClient.setQueryData([queryKey], (oldData: any) => {
                 if (!oldData || !oldData.pages || oldData.pages.length === 0) {
                     return oldData;
                 }
 
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const newData = oldData.pages.map((page: any) => {
                     return {
                         ...page,
@@ -50,6 +52,7 @@ export const useChatSocket = ({ addKey, updateKey, queryKey}: ChatSocketProps) =
         });
 
         socket.on(addKey, (message: MessageWithMemberWithProfile) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             queryClient.setQueryData([queryKey], (oldData: any) => {
                 if (!oldData || !oldData.pages || oldData.pages.length === 0) {
                     return {
