@@ -12,7 +12,7 @@ AwakenChat is a full-stack, real-time chat application inspired by Discord, buil
 - **Authentication:** Clerk  
 - **Audio/Video:** LiveKit  
 - **File Uploads:** UploadThing  
-- **Deployment:** Render
+- **Deployment:** Vercel
 
 ---
 
